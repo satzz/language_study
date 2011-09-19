@@ -2,6 +2,7 @@
 -export([for/3]).
 -export([qsort/1]).
 -export([pythag/1]).
+-export([perms/1]).
 for(Max,Max,F)->[F(Max)];
 for(I,Max,F)->[F(I)|for(I+1,Max,F)].
 
@@ -17,4 +18,6 @@ pythag(N)->
     A*A+B*B =:= C*C
 ].
 
+perms([])->[[]];
+perms(K)->[[H|T] || H<-K, T<-perms(K--[H])].
     
