@@ -5,6 +5,7 @@
 -export([perms/1]).
 -export([odds_and_evens/1]).
 -export([odds_and_evens_acc/1]).
+-export([sqrt/1]).
 for(Max,Max,F)->[F(Max)];
 for(I,Max,F)->[F(I)|for(I+1,Max,F)].
 
@@ -37,3 +38,9 @@ odds_and_evens_acc([H|T], Odds, Evens)->
     end;
 odds_and_evens_acc([], Odds, Evens)->
     {Odds, Evens}.
+
+
+sqrt(X) when X<0 ->
+    erlang:error({squareRootNegativeArgument, X});
+sqrt(X)->
+    math:sqrt(X).
