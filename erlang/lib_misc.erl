@@ -6,6 +6,9 @@
 -export([odds_and_evens/1]).
 -export([odds_and_evens_acc/1]).
 -export([sqrt/1]).
+-export([sleep/1]).
+-export([flush_buffer/0]).
+-export([priority_receive/0]).
 for(Max,Max,F)->[F(Max)];
 for(I,Max,F)->[F(I)|for(I+1,Max,F)].
 
@@ -44,3 +47,23 @@ sqrt(X) when X<0 ->
     erlang:error({squareRootNegativeArgument, X});
 sqrt(X)->
     math:sqrt(X).
+
+sleep(T) ->
+    receive
+    after T -> true
+    end.
+flush_buffer() ->
+    receive
+        _Any -> flush_buffer()
+    after 0->
+        true
+    end.
+priority_receive() ->
+    receive
+        {alarm, X} -> {alarm, X}
+    after 0 ->
+        receive
+            Any -> Any
+        end
+    end.
+            
