@@ -9,6 +9,7 @@
 -export([sleep/1]).
 -export([flush_buffer/0]).
 -export([priority_receive/0]).
+-export([on_exit/2]).
 for(Max,Max,F)->[F(Max)];
 for(I,Max,F)->[F(I)|for(I+1,Max,F)].
 
@@ -66,4 +67,14 @@ priority_receive() ->
             Any -> Any
         end
     end.
-            
+on_exit(Pid, Fun) ->
+    spawn(
+        fun() ->
+            process_flag(trap_exit, true),
+            link(Pid),
+            receive
+                {'EXIT', Pid, Why} -> Fun(Why)
+            end
+        end
+    ).
+
