@@ -6,6 +6,14 @@
   (if (null? (cdr lis))
       lis
       (append2 (reverse (cdr lis)) (list (car lis)))))
+
+(define (reverse2 lis)
+  (define (reverse-rec lis ret)
+    (if (null? lis)
+        ret
+        (reverse-rec (cdr lis) (cons (car lis) ret))))
+  (reverse-rec lis ()))
+
 (define (find pred lis)
   (if (null? lis)
       #f
