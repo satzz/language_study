@@ -20,3 +20,6 @@
       (if (pred (car lis))
           (car lis)
           (find pred (cdr lis)))))
+
+(define (length2 lis)
+  (fold (lambda (a b) (+ b 1)) 0 lis))
