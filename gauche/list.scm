@@ -26,3 +26,8 @@
 
 (define (for-each-numbers proc lis)
   (for-each proc (filter number? lis)))
+
+(define (numbers-only proc1)
+  (lambda (proc2 lis) (proc1 proc2 (filter number? lis))))
+
+
