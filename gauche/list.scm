@@ -32,4 +32,9 @@
 
 (define (list2 . a) a)
 
+(define (make-logger func)
+  (lambda args
+    (print "args=" args)
+    (apply func args)))
+
 
