@@ -30,4 +30,6 @@
 (define (numbers-only proc1)
   (lambda (proc2 lis) (proc1 proc2 (filter number? lis))))
 
+(define (list2 . a) a)
+
 
